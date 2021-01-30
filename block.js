@@ -10,25 +10,34 @@ class Block {
 
 	constructor(data){
 		this.id = 0;
-        this.nonce = 144444;
-      	this.body = data;
-      	this.hash = "";
-    }
+    this.nonce = 144444;
+    this.body = data;
+    this.hash = "";
+  }
     
-    /**
-     * Step 1. Implement `generateHash()`
-     * method that return the `self` block with the hash.
-     * 
-     * Create a Promise that resolve with `self` after you create 
-     * the hash of the object and assigned to the hash property `self.hash = ...`
-     */
-  	// 
-  	generateHash() {
-      	// Use this to create a temporary reference of the class object
-      	let self = this;
-        //Implement your code here
-        
-    }
+  /**
+   * Step 1. Implement `generateHash()`
+   * method that return the `self` block with the hash.
+   * 
+   * Create a Promise that resolve with `self` after you create 
+   * the hash of the object and assigned to the hash property `self.hash = ...`
+   */
+  // 
+  generateHash() {
+      // Use this to create a temporary reference of the class object
+      let self = this;
+      //Implement your code here
+      
+      let creatingBlock = new Promise(function(myResolve, myReject) {
+        let newHash = SHA256(JSON.stringify(self));
+        self.hash = newHash;
+
+        myResolve(self);
+      });
+
+      return creatingBlock;
+  }
+
 }
 
 // Exporting the class Block to be reuse in other files
